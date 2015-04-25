@@ -1,0 +1,51 @@
+<!doctype html>
+<html>
+
+    <head>
+
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, height=device-height, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+
+        <script>if (!('registerElement' in document && 'createShadowRoot' in HTMLElement.prototype && 'import' in document.createElement('link') && 'content' in document.createElement('template'))) document.write('<script src="/webcomponentsjs/webcomponents.js"><\/script>');</script>
+
+        <link rel="import" href="../mat-demo/mat-demo.html">
+        <link rel="import" href="mat-checkbox.html">
+
+    </head>
+
+    <!-- BODY -->
+    <body fullbleed unresolved>
+
+        <polymer-element name="mat-checkbox-demo" noscript>
+
+            <template>
+                <style>
+                    :host .input {
+                        margin: auto;
+                        max-width: 256px;
+                    }
+                </style>
+                <mat-demo label="mat-checkbox">
+
+                    <h1>Default</h1>
+                    <mat-checkbox class="input" label="Normal"></mat-checkbox>
+                    <mat-checkbox class="input" label="Checked" checked></mat-checkbox>
+                    <mat-checkbox class="input" label="Disabled" disabled></mat-checkbox>
+                    <mat-checkbox class="input" label="Disabled checked" disabled checked></mat-checkbox>
+
+                    <h1>Flip</h1>
+                    <mat-checkbox class="input" flip label="Normal"></mat-checkbox>
+                    <mat-checkbox class="input" flip label="Checked" checked></mat-checkbox>
+                    <mat-checkbox class="input" flip label="Disabled" disabled></mat-checkbox>
+                    <mat-checkbox class="input" flip label="Disabled checked" disabled checked></mat-checkbox>
+
+                </mat-demo>
+            </template>
+
+        </polymer-element>
+
+        <mat-checkbox-demo></mat-checkbox-demo>
+
+    </body>
+
+</html>

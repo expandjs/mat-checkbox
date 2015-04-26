@@ -112,7 +112,7 @@ This element is used to display a material checkbox.
                   opUpdate="{{update}}" type="checkbox" value="{{value}}"></template>
         <div id="matCheckboxWrapper">
             <mat-icon-button id="matCheckboxToggle" active="{{checked}}" activeColor="teal" activeIcon="toggle:check-box" disabled="{{disabled}}" focused="{{focused}}" icon="toggle:check-box-outline-blank" pressed="{{pressed}}" toggleable></mat-icon-button>
-            <template if="{{label}}"><mat-ink id="matCheckboxLabel" disabled="{{disabled}}" on-tap="{{toggle}}">{{label}}</mat-ink></template>
+            <template if="{{label}}"><mat-ink id="matCheckboxLabel" disabled="{{disabled}}" on-click="{{toggle}}">{{label}}</mat-ink></template>
         </div>
     </template>
 

@@ -31,7 +31,7 @@ This element is used to display a material checkbox.
 <link rel="import" href="../xp-input-state/xp-input-state.html">
 <link rel="import" href="../xp-pressed-state/xp-pressed-state.html">
 
-<polymer-element name="mat-checkbox" constructor="MATCheckboxElement" attributes="autoFocus changed checked disabled emptyLabel flip focused form inputElement label name value">
+<polymer-element name="mat-checkbox" constructor="MATCheckboxElement" attributes="autoFocus changed checked disabled emptyLabel flip focused form injected label model name">
 
     <template>
         <style>
@@ -107,9 +107,9 @@ This element is used to display a material checkbox.
             }
         </style>
         <template context="{{}}" is="xp-input-state" id="xpInputState" changed="{{changed}}" checked="{{checked}}"
-                  disabled="{{disabled}}" focused="{{focused}}" form="{{form}}" inputElement="{{$.matCheckboxToggle}}"
-                  name="{{name}}" opCommitFrom="{{commitFrom}}" opCommitTo="{{commitTo}}" opIndex="{{index}}"
-                  opUpdate="{{update}}" type="checkbox" value="{{value}}"></template>
+                  disabled="{{disabled}}" focused="{{focused}}" form="{{form}}" injected="{{$.matCheckboxToggle}}"
+                  model="{{model}}" name="{{name}}" opCommitFrom="{{commitFrom}}" opCommitTo="{{commitTo}}"
+                  opIndex="{{index}}" opUpdate="{{update}}" type="checkbox"></template>
         <div id="matCheckboxWrapper">
             <mat-icon-button id="matCheckboxToggle" active="{{checked}}" activeColor="teal" activeIcon="toggle:check-box" disabled="{{disabled}}" focused="{{focused}}" icon="toggle:check-box-outline-blank" pressed="{{pressed}}" toggleable></mat-icon-button>
             <template if="{{label}}"><mat-ink id="matCheckboxLabel" disabled="{{disabled}}" on-click="{{toggle}}">{{label}}</mat-ink></template>
@@ -166,7 +166,7 @@ This element is used to display a material checkbox.
              */
             commitFrom: function () {
                 var self = this;
-                self.checked = self.inputElement.checked;
+                self.checked = self.injected.checked;
                 return self;
             },
 
@@ -179,7 +179,7 @@ This element is used to display a material checkbox.
              */
             commitTo: function () {
                 var self = this;
-                if (self.checked !== self.inputElement.checked) { self.inputElement.checked = self.checked; }
+                if (self.checked !== self.injected.checked) { self.injected.checked = self.checked; }
                 return self;
             },
 
@@ -206,8 +206,8 @@ This element is used to display a material checkbox.
              */
             update: function () {
                 var self = this;
-                XP.setAttribute(self.inputElement, 'disabled', self.disabled);
-                XP.setAttribute(self.inputElement, 'name', self.name);
+                XP.setAttribute(self.injected, 'disabled', self.disabled);
+                XP.setAttribute(self.injected, 'name', self.name);
                 return self;
             },
 
@@ -303,11 +303,11 @@ This element is used to display a material checkbox.
                 /**
                  * The appended input's element.
                  *
-                 * @attribute inputElement
+                 * @attribute injected
                  * @type Element
                  * @readonly
                  */
-                inputElement: {reflect: false, value: null},
+                injected: {reflect: false, value: null},
 
                 /**
                  * The input's label.
@@ -319,21 +319,21 @@ This element is used to display a material checkbox.
                 label: {reflect: false, value: ''},
 
                 /**
+                 * The input's model.
+                 *
+                 * @attribute model
+                 * @type *
+                 */
+                model: {reflect: false, value: null},
+
+                /**
                  * The input's name.
                  *
                  * @attribute name
                  * @type string
                  * @default ""
                  */
-                name: {reflect: true, value: ''},
-
-                /**
-                 * The input's value.
-                 *
-                 * @attribute value
-                 * @type *
-                 */
-                value: {reflect: false, value: null}
+                name: {reflect: true, value: ''}
             },
 
             /*********************************************************************/
@@ -352,7 +352,7 @@ This element is used to display a material checkbox.
 
             // LISTENER
             ready: function () {
-                this.inputElement = this.appendChild(XP.createElement('input', {attributes: {type: 'checkbox', checked: this.checked, hidden: true}}));
+                this.injected = this.appendChild(XP.createElement('input', {attributes: {type: 'checkbox', checked: this.checked, hidden: true}}));
             },
 
             /*********************************************************************/

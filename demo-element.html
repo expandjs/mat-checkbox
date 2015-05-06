@@ -1,0 +1,30 @@
+<link rel="import" href="../mat-demo/mat-demo.html">
+<link rel="import" href="mat-checkbox.html">
+
+<polymer-element name="mat-checkbox-demo" noscript>
+
+    <template>
+        <style>
+            :host .input {
+                margin: auto;
+                max-width: 256px;
+            }
+        </style>
+        <mat-demo label="mat-checkbox">
+
+            <h1>Default</h1>
+            <mat-checkbox class="input" label="Normal"></mat-checkbox>
+            <mat-checkbox class="input" label="Checked" checked></mat-checkbox>
+            <mat-checkbox class="input" label="Disabled" disabled></mat-checkbox>
+            <mat-checkbox class="input" label="Disabled checked" disabled checked></mat-checkbox>
+
+            <h1>Flip</h1>
+            <mat-checkbox class="input" flip label="Normal"></mat-checkbox>
+            <mat-checkbox class="input" flip label="Checked" checked></mat-checkbox>
+            <mat-checkbox class="input" flip label="Disabled" disabled></mat-checkbox>
+            <mat-checkbox class="input" flip label="Disabled checked" disabled checked></mat-checkbox>
+
+        </mat-demo>
+    </template>
+
+</polymer-element>

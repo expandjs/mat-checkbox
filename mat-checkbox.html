@@ -12,8 +12,8 @@ This element is used to display a material checkbox.
 @element mat-checkbox
 @description A custom element used to display a Material Design checkbox
 @group inputs
-@homepage http://www.expandjs.com/elements/mat-checkbox
-@demo http://www.expandjs.com/demo/mat-checkbox
+@homepage http://expandjs.com/elements/mat-checkbox
+@demo http://expandjs.com/demo/mat-checkbox
 
 @dependency polymer Polymer/polymer#^0.5
 @dependency expandjs ExpandJS/expandjs
@@ -119,6 +119,18 @@ This element is used to display a material checkbox.
 
     <script>
         XPElement({
+
+            /**
+             * Blurs the input.
+             *
+             * @method blur
+             * @returns {Element}
+             */
+            blur: function () {
+                var self = this;
+                self.$.matCheckboxToggle.blur();
+                return self;
+            },
 
             /**
              * Focuses the input

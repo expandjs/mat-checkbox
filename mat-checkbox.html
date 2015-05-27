@@ -114,7 +114,7 @@ This element is used to display a material checkbox.
                   opIndex="{{index}}" opUpdate="{{update}}" type="checkbox"></template>
         <div id="matCheckboxWrapper">
             <mat-icon-button id="matCheckboxToggle" active="{{checked}}" activeColor="teal" activeIcon="toggle:check-box" disabled="{{disabled}}" focused="{{focused}}" icon="toggle:check-box-outline-blank" pressed="{{pressed}}" toggleable></mat-icon-button>
-            <template if="{{label}}"><mat-ink id="matCheckboxLabel" disabled="{{disabled}}" on-click="{{toggle}}">{{label}}</mat-ink></template>
+            <template if="{{label}}"><mat-ink id="matCheckboxLabel" disabled="{{disabled}}" on-click="{{handleClick}}">{{label}}</mat-ink></template>
         </div>
     </template>
 
@@ -373,6 +373,11 @@ This element is used to display a material checkbox.
             },
 
             /*********************************************************************/
+
+            // HANDLER
+            handleClick: function (event) {
+                if (!event.button) { this.toggle(); }
+            },
 
             // HANDLER
             handleKeyup: function (event) {

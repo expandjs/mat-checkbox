@@ -24,14 +24,14 @@
     "**/.*"
   ],
   "dependencies": {
-    "expandjs": "ExpandJS/expandjs",
-    "mat-icon-button": "ExpandJS/mat-icon-button",
-    "mat-ink": "ExpandJS/mat-ink",
-    "xp-input-state": "ExpandJS/xp-input-state",
-    "xp-pressed-state": "ExpandJS/xp-pressed-state",
+    "expandjs": "ExpandJS/expandjs#alpha",
+    "mat-icon-button": "ExpandJS/mat-icon-button#alpha",
+    "mat-ink": "ExpandJS/mat-ink#alpha",
+    "xp-input-state": "ExpandJS/xp-input-state#alpha",
+    "xp-pressed-state": "ExpandJS/xp-pressed-state#alpha",
     "polymer": "Polymer/polymer#^0.5"
   },
   "devDependencies": {
-    "mat-demo": "ExpandJS/mat-demo"
+    "mat-demo": "ExpandJS/mat-demo#alpha"
   }
 }

@@ -3,29 +3,34 @@
 
 <dom-module id="mat-checkbox-demo">
 
-    <style>
-        :host mat-checkbox {
-            margin: auto;
-            max-width: 256px;
-        }
-    </style>
-
     <template>
-        <mat-demo label="mat-checkbox">
 
-            <div class="demo-title">Default</div>
+        <mat-demo label="Default">
+            <script type="text/html">
+                <mat-checkbox label="Normal"></mat-checkbox>
+                <mat-checkbox label="Checked" checked></mat-checkbox>
+                <mat-checkbox label="Disabled" disabled></mat-checkbox>
+                <mat-checkbox label="Disabled checked" disabled checked></mat-checkbox>
+            </script>
             <mat-checkbox label="Normal"></mat-checkbox>
             <mat-checkbox label="Checked" checked></mat-checkbox>
             <mat-checkbox label="Disabled" disabled></mat-checkbox>
             <mat-checkbox label="Disabled checked" disabled checked></mat-checkbox>
+        </mat-demo>
 
-            <div class="demo-title">Flip</div>
+        <mat-demo label="Flip">
+            <script type="text/html">
+                <mat-checkbox flip label="Normal"></mat-checkbox>
+                <mat-checkbox flip label="Checked" checked></mat-checkbox>
+                <mat-checkbox flip label="Disabled" disabled></mat-checkbox>
+                <mat-checkbox flip label="Disabled checked" disabled checked></mat-checkbox>
+            </script>
             <mat-checkbox flip label="Normal"></mat-checkbox>
             <mat-checkbox flip label="Checked" checked></mat-checkbox>
             <mat-checkbox flip label="Disabled" disabled></mat-checkbox>
             <mat-checkbox flip label="Disabled checked" disabled checked></mat-checkbox>
-
         </mat-demo>
+
     </template>
 
     <script>

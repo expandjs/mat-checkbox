@@ -1,7 +1,7 @@
 {
   "name": "mat-checkbox",
   "license": "BSD-3-Clause",
-  "version": "0.9.3",
+  "version": "0.9.4",
   "description": "A custom element used to display a Material Design checkbox",
   "homepage": "http://expandjs.com/elements/mat-checkbox",
   "authors": [
@@ -24,15 +24,14 @@
     "**/.*"
   ],
   "dependencies": {
-    "expandjs": "ExpandJS/expandjs#0.9.3",
-    "mat-icon-button": "ExpandJS/mat-icon-button#0.9.3",
-    "mat-icons": "ExpandJS/mat-icons#0.9.3",
-    "mat-ink": "ExpandJS/mat-ink#0.9.3",
-    "xp-input-behavior": "ExpandJS/xp-input-behavior#0.9.3",
-    "xp-pressed-behavior": "ExpandJS/xp-pressed-behavior#0.9.3",
+    "expandjs": "ExpandJS/expandjs#0.9.4",
+    "mat-icon-button": "ExpandJS/mat-icon-button#0.9.4",
+    "mat-icons": "ExpandJS/mat-icons#0.9.4",
+    "mat-ink": "ExpandJS/mat-ink#0.9.4",
+    "xp-input-behavior": "ExpandJS/xp-input-behavior#0.9.4",
     "polymer": "Polymer/polymer#^1.0.0"
   },
   "devDependencies": {
-    "mat-demo": "ExpandJS/mat-demo#0.9.3"
+    "mat-demo": "ExpandJS/mat-demo#0.9.4"
   }
 }

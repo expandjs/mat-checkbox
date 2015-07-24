@@ -28,6 +28,7 @@ This element is used to display a material checkbox.
 
 @devDependency mat-demo ExpandJS/mat-demo#0.9.5
 -->
+
 <link rel="import" href="../polymer/polymer.html">
 <link rel="import" href="../expandjs/expandjs.html">
 <link rel="import" href="../mat-icon-button/mat-icon-button.html">
@@ -180,7 +181,20 @@ This element is used to display a material checkbox.
             /*********************************************************************/
 
             /**
-             * Commits from input's value.
+             * Set the adaptee.
+             *
+             * @method _adapt
+             * @returns {Element}
+             * @private
+             */
+            _adapt: function () {
+                var self = this;
+                self._setAdaptee(XP.appendChild(Polymer.dom(self), XP.createElement('input', {attributes: {type: self.type, checked: self.checked}})));
+                return self;
+            },
+
+            /**
+             * Reflects adapted input's `value` onto the element.
              *
              * @method _commitFrom
              * @returns {Element}
@@ -188,12 +202,12 @@ This element is used to display a material checkbox.
              */
             _commitFrom: function () {
                 var self = this;
-                self.checked = self.input.checked;
+                self.checked = self.adaptee.checked;
                 return self;
             },
 
             /**
-             * Commits to input's value.
+             * Reflect element's `value` onto the adapted input.
              *
              * @method _commitTo
              * @returns {Element}
@@ -201,12 +215,12 @@ This element is used to display a material checkbox.
              */
             _commitTo: function () {
                 var self = this;
-                if (self.checked !== self.input.checked) { self.input.checked = self.checked; }
+                if (self.checked !== self.adaptee.checked) { self.adaptee.checked = self.checked; }
                 return self;
             },
 
             /**
-             * Indexes the input.
+             * Reflects element's `tabIndex` onto the adapted input.
              *
              * @method _index
              * @param {number} value
@@ -220,29 +234,16 @@ This element is used to display a material checkbox.
             },
 
             /**
-             * Injects the input element.
+             * Updates adapted input's attributes.
              *
-             * @method _inject
-             * @returns {Element}
-             * @private
-             */
-            _inject: function () {
-                var self = this;
-                self._setInput(XP.appendChild(Polymer.dom(self), XP.createElement('input', {attributes: {type: self.type, checked: self.checked}})));
-                return self;
-            },
-
-            /**
-             * Updates the input.
-             *
-             * @method _updateInput
+             * @method _update
              * @returns {Element}
              * @private
              */
             _update: function () {
                 var self = this;
-                XP.setAttribute(self.input, 'disabled', self.disabled);
-                XP.setAttribute(self.input, 'name', self.name);
+                XP.setAttribute(self.adaptee, 'disabled', self.disabled);
+                XP.setAttribute(self.adaptee, 'name', self.name);
                 return self;
             },
 

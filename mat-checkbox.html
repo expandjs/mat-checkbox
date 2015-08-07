@@ -7,7 +7,40 @@ The complete set of contributors may be found at https://expandjs.github.io/CONT
 -->
 
 <!--
-This element is used to display a material checkbox.
+An element used to display a [Material Design checkbox](http://www.google.com/design/spec/components/selection-controls.html#selection-controls-checkbox).
+
+```html
+<mat-checkbox></mat-checkbox>
+```
+
+It can have a label along side itself...
+
+```html
+<mat-checkbox label="My checkbox"></mat-checkbox>
+```
+
+...and it can also be right aligned.
+
+```html
+<mat-checkbox label="My checkbox" flip></mat-checkbox>
+```
+
+To access the actual value, you have two attributes:
+
+- **checked** is the current value as boolean
+- **model** does the same, however it adds some additional behaviors
+
+If the initial value was `null`, when the checkbox is unchecked, the `model` returns to
+`null` instead of `false`.
+
+This is useful for binding data that has not yet been initialized, needs to be created on
+the fly or comes from external sources.
+
+Generally, we recommend to use the `model` for data binding and `checked` to set the default.
+
+```html
+<mat-checkbox label="My checkbox" model="{{myCheckbox}}" checked></mat-checkbox>
+```
 
 @element mat-checkbox
 @description A custom element used to display a Material Design checkbox
@@ -20,13 +53,13 @@ This element is used to display a material checkbox.
 @behavior xp-input-behavior /bower_components/xp-input-behavior/xp-input-behavior.html
 
 @dependency polymer Polymer/polymer#^1.0.0
-@dependency expandjs ExpandJS/expandjs#0.9.5
-@dependency mat-icon-button ExpandJS/mat-icon-button#0.9.5
-@dependency mat-icons ExpandJS/mat-icons#0.9.5
-@dependency mat-ink ExpandJS/mat-ink#0.9.5
-@dependency xp-input-behavior ExpandJS/xp-input-behavior#0.9.5
+@dependency expandjs ExpandJS/expandjs#0.9.6
+@dependency mat-icon-button ExpandJS/mat-icon-button#0.9.6
+@dependency mat-icons ExpandJS/mat-icons#0.9.6
+@dependency mat-ink ExpandJS/mat-ink#0.9.6
+@dependency xp-input-behavior ExpandJS/xp-input-behavior#0.9.6
 
-@devDependency mat-demo ExpandJS/mat-demo#0.9.5
+@devDependency mat-demo ExpandJS/mat-demo#0.9.6
 -->
 
 <link rel="import" href="../polymer/polymer.html">

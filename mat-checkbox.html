@@ -171,6 +171,7 @@ Generally, we recommend to use the `model` for data binding and `checked` to set
         <div id="matCheckboxWrapper">
             <mat-icon-button id="matCheckboxToggle" active="{{checked}}" active-color="teal" active-icon="toggle:check-box" disabled="[[disabled]]" focused="{{focused}}" icon="toggle:check-box-outline-blank" toggleable></mat-icon-button>
             <template is="dom-if" if="[[label]]"><mat-ink id="matCheckboxLabel" disabled="[[disabled]]" on-click="_handleToggle">{{label}}</mat-ink></template>
+            <content id="content" select="input"></content>
         </div>
     </template>
 

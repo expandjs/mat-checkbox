@@ -223,7 +223,7 @@ Generally, we recommend to use the `model` for data binding and `checked` to set
              */
             _adapt: function () {
                 var self = this;
-                self._setAdaptee(XP.appendChild(Polymer.dom(self), XP.createElement('input', {attributes: {value: self.value, type: self.type, checked: self.checked}})));
+                self._setAdaptee(XP.appendChild(Polymer.dom(self), XP.createElement('input', {attributes: {type: self.type, checked: self.checked, value: self.value}})));
                 return self;
             },
 

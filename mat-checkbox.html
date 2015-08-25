@@ -223,7 +223,8 @@ Generally, we recommend to use the `model` for data binding and `checked` to set
              */
             _adapt: function () {
                 var self = this;
-                self._setAdaptee(XP.appendChild(Polymer.dom(self), XP.createElement('input', {attributes: {type: self.type, checked: self.checked}})));
+                self._setAdaptee(XP.appendChild(Polymer.dom(self),
+                  XP.createElement('input', {attributes: {value: self.value, type: self.type, checked: self.checked}})));
                 return self;
             },
 
@@ -237,6 +238,7 @@ Generally, we recommend to use the `model` for data binding and `checked` to set
             _commitFrom: function () {
                 var self = this;
                 self.checked = self.adaptee.checked;
+                self.value = self.adaptee.value;
                 return self;
             },
 
@@ -249,7 +251,8 @@ Generally, we recommend to use the `model` for data binding and `checked` to set
              */
             _commitTo: function () {
                 var self = this;
-                if (self.checked !== self.adaptee.checked) { self.adaptee.checked = self.checked; }
+                if(self.checked !== self.adaptee.checked) { self.adaptee.checked = self.checked; }
+                if(self.value !== self.adaptee.value ) { self.adaptee.value = self.value };
                 return self;
             },
 
@@ -278,6 +281,7 @@ Generally, we recommend to use the `model` for data binding and `checked` to set
                 var self = this;
                 XP.setAttribute(self.adaptee, 'disabled', self.disabled);
                 XP.setAttribute(self.adaptee, 'name', self.name);
+                XP.setAttribute(self.adaptee, 'value', self.value);
                 return self;
             },
 

@@ -7,19 +7,13 @@ The complete set of contributors may be found at https://expandjs.github.io/CONT
 -->
 
 <!--
-An element used to display a [Material Design checkbox](http://www.google.com/design/spec/components/selection-controls.html#selection-controls-checkbox).
+A custom element used to display a [Material Design checkbox](http://www.google.com/design/spec/components/selection-controls.html#selection-controls-checkbox).
 
 ```html
-<mat-checkbox></mat-checkbox>
+<mat-checkbox label="I agree"></mat-checkbox>
 ```
 
-It can have a label along side itself...
-
-```html
-<mat-checkbox label="My checkbox"></mat-checkbox>
-```
-
-...and it can also be right aligned.
+Set the `flip` attribute to right align the toggle button.
 
 ```html
 <mat-checkbox label="My checkbox" flip></mat-checkbox>
@@ -36,7 +30,7 @@ If the initial value was `null`, when the checkbox is unchecked, the `model` ret
 This is useful for binding data that has not yet been initialized, needs to be created on
 the fly or comes from external sources.
 
-Generally, we recommend to use the `model` for data binding and `checked` to set the default.
+Generally, we recommend to use `model` for data binding and `checked` to set the default.
 
 ```html
 <mat-checkbox label="My checkbox" model="{{myCheckbox}}" checked></mat-checkbox>
@@ -44,69 +38,62 @@ Generally, we recommend to use the `model` for data binding and `checked` to set
 
 @element mat-checkbox
 @description A custom element used to display a Material Design checkbox
-@keywords material design, material checkbox, web app, html5, expandjs, web-components
+@keywords material design, material checkbox, expandjs, web app, custom elements, web-components
 @group inputs
+@hot
+
 @homepage http://expandjs.com/elements/mat-checkbox
 @repository https://github.com/ExpandJS/mat-checkbox
 @demo http://expandjs.com/demo/mat-checkbox
 
-@behavior xp-input-behavior /bower_components/xp-input-behavior/xp-input-behavior.html
+@behavior mat-input-behavior /bower_components/mat-input-behavior/mat-input-behavior.html
 
-@dependency polymer Polymer/polymer#^1.1.0
-@dependency expandjs ExpandJS/expandjs#0.9.11
-@dependency mat-icon-button ExpandJS/mat-icon-button#0.9.11
-@dependency mat-icons ExpandJS/mat-icons#0.9.11
-@dependency mat-ink ExpandJS/mat-ink#0.9.11
-@dependency xp-input-behavior ExpandJS/xp-input-behavior#0.9.11
+@dependency polymer Polymer/polymer#^1.2.0
+@dependency expandjs ExpandJS/expandjs#0.10.0
+@dependency mat-icon-button ExpandJS/mat-icon-button#0.10.0
+@dependency mat-icons ExpandJS/mat-icons#0.10.0
+@dependency mat-ink ExpandJS/mat-ink#0.10.0
+@dependency mat-input-behavior ExpandJS/mat-input-behavior#0.10.0
+@dependency mat-typography ExpandJS/mat-typography#0.10.0
 
-@devDependency mat-demo ExpandJS/mat-demo#0.9.11
+@devDependency mat-demo ExpandJS/mat-demo#0.10.0
 -->
 
 <link rel="import" href="../polymer/polymer.html">
 <link rel="import" href="../expandjs/expandjs.html">
 <link rel="import" href="../mat-icon-button/mat-icon-button.html">
-<link rel="import" href="../mat-icons/toggle-icons.html">
+<link rel="import" href="../mat-icons/mat-icons.html">
 <link rel="import" href="../mat-ink/mat-ink.html">
-<link rel="import" href="../xp-input-behavior/xp-input-behavior.html">
+<link rel="import" href="../mat-input-behavior/mat-input-behavior.html">
+<link rel="import" href="../mat-input-behavior/mat-input-styles.html">
+<link rel="import" href="../mat-typography/mat-typography.html">
 
 <dom-module id="mat-checkbox">
 
-    <template>
+    <template strip-whitespace>
+
+        <style include="mat-input-styles"></style>
 
         <style>
             :host {
                 @apply(--mat-font-subhead);
                 cursor: pointer;
-                display: block;
                 height: 48px;
                 line-height: 48px !important; /* override */
-                overflow: visible;
-                text-overflow: ellipsis !important; /* override */
-                -moz-user-select: none;
-                -ms-user-select: none;
-                -webkit-user-select: none;
-                user-select: none;
-                white-space: nowrap !important; /* override */
             }
 
-            :host([disabled]) {
-                cursor: not-allowed !important;
-                pointer-events: none !important;
-            }
-
-            :host([empty-label]) {
+            :host([label=""]),
+            :host(:not([label])) {
                 height: 40px;
                 margin: 4px;
                 width: 40px;
             }
 
             :host([flip]) {
-                margin-right: -12px;
                 text-align: right;
             }
 
             :host(:not([flip])) {
-                margin-left: -12px;
                 text-align: left;
             }
 
@@ -114,66 +101,61 @@ Generally, we recommend to use the `model` for data binding and `checked` to set
                 display: none !important;
             }
 
-            :host #matCheckboxWrapper {
-                height: 100%;
-                position: relative;
-            }
-
-            :host([disabled]) #matCheckboxToggle[active]::shadow #matIconButtonIcon {
-                display: none !important;
-            }
-
-            :host([empty-label]) #matCheckboxToggle {
+            :host([label=""]) .button,
+            :host(:not([label])) .button {
                 margin: 0;
             }
 
-            :host(:not([empty-label])[flip]) #matCheckboxToggle {
-                right: 0;
+            :host([label][flip]:not([label=""])) .button {
+                right: -12px;
                 position: absolute;
             }
 
-            :host(:not([empty-label]):not([flip])) #matCheckboxToggle {
-                left: 0;
+            :host([label]:not([flip]):not([label=""])) .button {
+                left: -12px;
                 position: absolute;
             }
 
-            :host #matCheckboxLabel {
-                height: 100%;
+            :host .label {
                 overflow: hidden;
-                text-overflow: ellipsis;
+                text-overflow: ellipsis !important;
+                white-space: nowrap !important;
             }
 
-            :host([flip]) #matCheckboxLabel {
-                padding-right: 64px;
+            :host([flip]) .label {
+                padding-right: 52px;
             }
 
-            :host(:not([flip])) #matCheckboxLabel {
-                padding-left: 64px;
+            :host(:not([flip])) .label {
+                padding-left: 52px;
             }
 
             /* ANIMATION */
 
-            :host #matCheckboxToggle::shadow #matIconButtonIcon {
-                -webkit-transform: scale(1);
-                transform: scale(1);
-                transition-delay: -0.05s;
-            }
+            :host .holder {
 
-            :host #matCheckboxToggle[active]::shadow #matIconButtonIcon {
-                opacity: 0;
-                transition-delay: 0.1s;
-            }
+                --mat-icon-button-icon-one: {
+                    -webkit-transform: scale(1) !important;
+                    transform: scale(1) !important;
+                    -webkit-transition-delay: -0.05s;
+                    transition-delay: -0.05s;
+                };
 
-            :host #matCheckboxToggle::shadow #matIconButtonIcon #matIconWrapper {
-                transition: color 0.4s;
+                --mat-icon-button-active-icon-one: {
+                    -webkit-transition-delay: 0.1s;
+                    transition-delay: 0.1s;
+                };
+
+                --mat-icon-button-active-icon-two: {
+                    color: var(--mat-checkbox-color, #009688);
+                };
             }
         </style>
 
-        <div id="matCheckboxWrapper">
-            <mat-icon-button id="matCheckboxToggle" active="{{checked}}" active-color="teal" active-icon="toggle:check-box" disabled="[[disabled]]" focused="{{focused}}" icon="toggle:check-box-outline-blank" toggleable></mat-icon-button>
-            <template is="dom-if" if="[[label]]"><mat-ink id="matCheckboxLabel" disabled="[[disabled]]" on-click="_handleToggle">{{label}}</mat-ink></template>
-            <content id="content" select="input"></content>
-        </div>
+        <content select="input"></content>
+
+        <mat-icon-button class="holder button" active="{{checked}}" active-icon="mat:check-box" disabled="[[disabled]]" focused="{{focused}}" icon="[[_computeIcon(checked, disabled)]]" toggleable></mat-icon-button>
+        <mat-ink class="label" disabled="[[disabled]]" on-click="_handleToggle">[[label]]</mat-ink>
 
     </template>
 
@@ -185,7 +167,7 @@ Generally, we recommend to use the `model` for data binding and `checked` to set
 
             // BEHAVIORS
             behaviors: [
-                Polymer.XPInputBehavior
+                Polymer.MatInputBehavior
             ],
 
             /*********************************************************************/
@@ -198,99 +180,131 @@ Generally, we recommend to use the `model` for data binding and `checked` to set
              */
             blur: function () {
                 var self = this;
-                self.$.matCheckboxToggle.blur();
+                self.holder.blur();
                 return self;
             },
 
             /**
-             * Focuses the input
+             * Focuses the input.
              *
              * @method focus
              * @returns {Element}
              */
             focus: function () {
                 var self = this;
-                self.$.matCheckboxToggle.focus();
+                self.holder.focus();
                 return self;
             },
 
             /*********************************************************************/
 
             /**
-             * Set the adaptee.
-             *
-             * @method _adapt
-             * @returns {Element}
-             * @private
-             */
-            _adapt: function () {
-                var self = this;
-                self._setAdaptee(XP.appendChild(Polymer.dom(self), XP.createElement('input', {attributes: {type: self.type, checked: self.checked, value: self.value}})));
-                return self;
-            },
-
-            /**
-             * Reflects adapted input's `value` onto the element.
+             * Reflects the native input's `value` onto the element.
              *
              * @method _commitFrom
              * @returns {Element}
              * @private
              */
             _commitFrom: function () {
+
+                // Vars
                 var self = this;
-                self.checked = self.adaptee.checked;
-                self.value = self.adaptee.value;
+
+                // Setting
+                self.checked = self.input.checked;
+                self.value   = self.input.value;
+
                 return self;
             },
 
             /**
-             * Reflect element's `value` onto the adapted input.
+             * Reflects the element's `tabIndex` onto the native input.
+             *
+             * @method _commitIndex
+             * @param {number} value
+             * @returns {Element}
+             * @private
+             */
+            _commitIndex: function (value) {
+
+                // Vars
+                var self = this;
+
+                // Setting
+                self.holder.tabIndex = value;
+
+                return self;
+            },
+
+            /**
+             * Reflects the element's `value` onto the native input.
              *
              * @method _commitTo
              * @returns {Element}
              * @private
              */
             _commitTo: function () {
+
+                // Vars
                 var self = this;
-                if (self.checked !== self.adaptee.checked) { self.adaptee.checked = self.checked; }
-                if (self.value !== self.adaptee.value ) { self.adaptee.value = self.value }
+
+                // Setting
+                if (self.checked !== self.input.checked) { self.input.checked = self.checked; }
+                if (self.value !== self.input.value ) { self.input.value = self.value; }
+
                 return self;
             },
 
             /**
-             * Reflects element's `tabIndex` onto the adapted input.
+             * Injects the native input.
              *
-             * @method _index
-             * @param {number} value
+             * @method _inject
              * @returns {Element}
              * @private
              */
-            _index: function (value) {
-                var self = this;
-                self.$.matCheckboxToggle.tabIndex = value;
+            _inject: function () {
+
+                // Vars
+                var self  = this,
+                    input = document.createElement('input');
+
+                // Setting
+                XP.setAttribute(input, 'checked', self.checked);
+                XP.setAttribute(input, 'type', self.type);
+                XP.setAttribute(input, 'value', self.value);
+
+                // Appending
+                self._setInput(Polymer.dom(self).appendChild(input));
+
                 return self;
             },
 
             /**
-             * Updates adapted input's attributes.
+             * Updates the native input's attributes.
              *
              * @method _update
              * @returns {Element}
              * @private
              */
             _update: function () {
+
+                // Vars
                 var self = this;
-                XP.setAttribute(self.adaptee, 'disabled', self.disabled);
-                XP.setAttribute(self.adaptee, 'name', self.name);
-                XP.setAttribute(self.adaptee, 'value', self.value);
+
+                // Setting
+                XP.setAttribute(self.input, 'disabled', self.disabled);
+                XP.setAttribute(self.input, 'name', self.name);
+                XP.setAttribute(self.input, 'type', self.type);
+                XP.setAttribute(self.input, 'value', self.value);
+
                 return self;
             },
 
             /**
-             * Updates element's validation state.
+             * Validates the native input's `value`.
              *
              * @method _validate
-             * @param {boolean | string} [invalidMessage = ""]
+             * @param {boolean | string} [invalidMessage]
              * @returns {Element}
              * @private
              */
@@ -303,11 +317,11 @@ Generally, we recommend to use the `model` for data binding and `checked` to set
                 var self = this;
 
                 // Customizing
-                if (invalidMessage !== undefined) { self.adaptee.setCustomValidity(invalidMessage || ''); }
+                if (XP.isDefined(invalidMessage)) { self.input.setCustomValidity(invalidMessage || ''); }
 
                 // Setting
-                self._setInvalidMessage(self.adaptee.validationMessage || null);
-                self._setInvalid(self.adaptee.validity.valid === false);
+                self._setInvalidMessage(self.input.validationMessage || null);
+                self._setInvalid(self.input.validity.valid === false);
 
                 return self;
             },
@@ -323,7 +337,24 @@ Generally, we recommend to use the `model` for data binding and `checked` to set
             properties: {
 
                 /**
-                 * If set to true, the check is right floated.
+                 * If set to true, the input is empty.
+                 *
+                 * @attribute empty
+                 * @type boolean
+                 * @default false
+                 * @notifies
+                 * @readonly
+                 */
+                empty: {
+                    notify: true,
+                    readOnly: true,
+                    reflectToAttribute: true,
+                    type: Boolean,
+                    value: false
+                },
+
+                /**
+                 * If set to true, the toggle button is right floated.
                  *
                  * @attribute flip
                  * @type boolean
@@ -343,7 +374,6 @@ Generally, we recommend to use the `model` for data binding and `checked` to set
                  * @default "checkbox"
                  */
                 type: {
-                    observer: '_typeChanged',
                     reflectToAttribute: true,
                     type: String,
                     value: 'checkbox'
@@ -352,8 +382,26 @@ Generally, we recommend to use the `model` for data binding and `checked` to set
 
             /*********************************************************************/
 
+            // COMPUTER
+            _computeIcon: function (checked, disabled) {
+                return !checked || !disabled ? 'mat:check-box-outline-blank' : null;
+            },
+
+            /*********************************************************************/
+
+            // LISTENER
+            created: function () {
+
+                // Classifying
+                this.classList.add('checkbox');
+            },
+
+            /*********************************************************************/
+
             // HANDLER
             _handleToggle: function (event) {
+
+                // Toggling
                 if (!event.button && (!event.keyCode || event.keyCode === 32)) { this.toggle(); }
             }
         });
